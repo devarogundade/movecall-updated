@@ -62,7 +62,15 @@ const TokenMemPool: Record<string, TokenLockedEvent[]> = {};
 const MessageMemPool: Record<string, MessageSentEvent[]> = {};
 const ProcessingPool: Record<string, boolean> = {};
 
-const Transactions: Record<string, string> = {};
+const Transactions: Record<
+  string,
+  {
+    digest: string;
+    receiver: Hex;
+    signers: string[];
+    signatures: number[][];
+  }
+> = {};
 
 const MOVECALL: Hex =
   "0x15ebec4c1f58e38024783d351f69ccdcebf02561e5d85aaf9ac40145770a0fc4";
@@ -166,7 +174,12 @@ class Attester {
       delete TokenMemPool[event.uid];
       delete ProcessingPool[event.uid];
 
-      Transactions[event.uid] = digest;
+      Transactions[event.uid] = {
+        digest,
+        receiver: event.receiver,
+        signers: event.signers,
+        signatures: event.signatures,
+      };
 
       return true;
     } catch (error) {
