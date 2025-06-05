@@ -1,5 +1,7 @@
 import { type PaginatedCoins } from "@iota/iota-sdk/client";
 import { Clients } from "./iota";
+import { IOTA_COIN } from "./constant";
+import { IOTA_TYPE_ARG } from "@iota/iota-sdk/utils";
 
 const CoinAPI = {
   async getCoinsBalance(
@@ -21,9 +23,8 @@ const CoinAPI = {
         let coinType = coinTypes[index];
 
         const filteredCoins = coins.data.filter(
-          (coin) => coin.coinType == coinType
+          (coin) => coin.coinType == coinType.replace(IOTA_COIN, IOTA_TYPE_ARG)
         );
-        console.log(filteredCoins);
 
         if (!balances[coinType]) balances[coinType] = BigInt(0);
         balances[coinType] += filteredCoins.reduce(

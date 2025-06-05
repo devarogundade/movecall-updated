@@ -1,3 +1,4 @@
+import { IOTA_TYPE_ARG } from "@iota/iota-sdk/utils";
 import { Transaction } from "@iota/iota-sdk/transactions";
 import { Contract, client, Coins, signer } from "./shared";
 
@@ -22,6 +23,8 @@ async function main() {
       `${Contract.MoveCall}::${coin.module}::${coin.coinType}`
     );
   }
+
+  await deployStrategy(IOTA_TYPE_ARG);
 }
 
 main();

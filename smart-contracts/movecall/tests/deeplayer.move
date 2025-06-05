@@ -421,7 +421,7 @@ module movecall::deeplayer_tests {
 
         let success = movecall_bridge::verify_simple_sig(
             vector[227, 236, 166, 236, 196, 13, 207, 119, 107, 240, 171, 64, 80, 195, 148, 94, 153, 70, 183, 147, 155, 108, 108, 100, 33],
-            @0x9e1b49043efc0bead9d0381713fa0c4348b05f59450cbb90961b6b98a67adb23,
+            @0x680d67389bdf13450ef450ee7db1a373d660269caf4f31640ee3511989396159,
             vector[72, 101, 108, 108, 111, 44, 32, 119, 111, 114, 108, 100, 33]
         );
 

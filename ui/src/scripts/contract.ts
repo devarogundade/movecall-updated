@@ -2,7 +2,7 @@ import type { Coin } from "./types";
 import { CoinAPI } from "./coin";
 import { Transaction } from "@iota/iota-sdk/transactions";
 import { bcs } from "@iota/iota-sdk/bcs";
-import { IOTA_CLOCK_OBJECT_ID } from "@iota/iota-sdk/utils";
+import { IOTA_CLOCK_OBJECT_ID, IOTA_TYPE_ARG } from "@iota/iota-sdk/utils";
 import type { NightlyConnectIotaAdapter } from "@nightlylabs/wallet-selector-iota";
 import { IOTA_COIN } from "./constant";
 

@@ -46,7 +46,7 @@ const operators: Operator[] = [
       "FontLabs. The drive to unlock everything that web3 enables is our north star.",
     active: true,
     address:
-      "0x9e1b49043efc0bead9d0381713fa0c4348b05f59450cbb90961b6b98a67adb23",
+      "0x680d67389bdf13450ef450ee7db1a373d660269caf4f31640ee3511989396159",
     link: "https://mystenlabs.com",
   },
   {
