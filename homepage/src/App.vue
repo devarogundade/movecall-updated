@@ -19,7 +19,7 @@ onMounted(() => {
         <div class="text">
           <h3>Restake, Earn, and Build Actively Validated Services.</h3>
           <p>Leverage on IOTA economical security for on-ramp services validation.</p>
-          <a href="https://movecall.netlify.app" target="_blank"><button>Launch App</button></a>
+          <a href="https://movecall-app.netlify.app" target="_blank"><button>Launch App</button></a>
         </div>
       </div>
     </div>

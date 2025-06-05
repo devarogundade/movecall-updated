@@ -289,7 +289,7 @@ watch(walletStore, () => {
             using
             zero-knowledge proofs.
           </p>
-          <a href="https://movecall.netlify.app/service/0x8c4bcfe5cac89ea732d9f507f46d56a7e37e3d161007060a5686b9399a9ea03c"
+          <a href="https://movecall-app.netlify.app/service/0x8c4bcfe5cac89ea732d9f507f46d56a7e37e3d161007060a5686b9399a9ea03c"
             target="_blank">
             <button>View Service on MoveCall.</button>
           </a>

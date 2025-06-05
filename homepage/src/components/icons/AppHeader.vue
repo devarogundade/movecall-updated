@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="actions">
-                    <a href="https://movecall.netlify.app" target="_blank"><button>Restake now</button></a>
+                    <a href="https://movecall-app.netlify.app" target="_blank"><button>Restake now</button></a>
                 </div>
             </header>
         </div>
