@@ -1,0 +1,25 @@
+{
+  "name": "movecall_bridge",
+  "version": "1.0.0",
+  "description": "ZK bridge",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "iota"
+  ],
+  "author": "devarogundade",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+    "@types/node": "^22.13.14",
+    "hardhat": "^2.23.0",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.2.0",
+    "dotenv": "^16.4.7",
+    "viem": "^2.24.2"
+  }
+}

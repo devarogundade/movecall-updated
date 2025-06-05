@@ -1,0 +1,13 @@
+[package]
+name = "movecall"
+edition = "2024.beta"
+license = "MIT"
+authors = ["Ibrahim (devarogundade@gmail.com)"]
+
+[dependencies]
+Iota = { git = "https://github.com/iotaledger/iota.git", subdir = "crates/iota-framework/packages/iota-framework", rev = "testnet" }
+
+[addresses]
+movecall = "0x0"
+hello_world_service_manager = "0x12"
+movecall_bridge = "0x13"
