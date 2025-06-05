@@ -31,7 +31,7 @@ const client = new IotaClient({
   url: getFullnodeUrl("testnet"),
 });
 
-const signer = Ed25519Keypair.fromSecretKey(process.env.SECRET_KEY!);
+const signer = Ed25519Keypair.deriveKeypair(process.env.SECRET_KEY!);
 
 const Coins = [
   {

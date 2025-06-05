@@ -14,7 +14,7 @@ async function registerAsOperator(key: string, metdata_uri: string) {
     ],
   });
   transaction.setGasBudget(50_000_000);
-  const signer = Ed25519Keypair.fromSecretKey(key);
+  const signer = Ed25519Keypair.deriveKeypair(key);
   const { digest } = await client.signAndExecuteTransaction({
     transaction,
     signer,

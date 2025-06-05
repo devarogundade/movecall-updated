@@ -56,16 +56,16 @@ const operators: Operator[] = [
       "Shunlexxi is a protocol that allows market participants to publish pricing information on-chain for others to use.",
     active: true,
     address:
-      "0x43988c5c280487483d05c4d5e1aba8d206f82c4c5d8493e85205f9ac393bcc61",
+      "0xa3130600c44ef580a9509845f6cf95cac0128ccaecfed604ffc194ed3048b273",
     link: "https://shunlexxi.network",
   },
   {
     name: "ANKR",
     image: "/images/ankr.png",
     about: "ANKR.",
-    active: true,
+    active: false,
     address:
-      "0x237fab2f9f5afc3eacec176fe1721534032cf85590f0e5a36dc6d7c668dbf897",
+      "0xb5d26c810c65c91936c7eaad4393b73b89f21f461b39129b64917a3eea58e304",
     link: "https://ankr.com",
   },
 ];

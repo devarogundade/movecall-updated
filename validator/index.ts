@@ -46,7 +46,7 @@ interface EventListenerCallback {
 
 if (!process.env.SECRET_KEY) throw new Error("Invalid secret key!");
 
-const signer = Ed25519Keypair.fromSecretKey(process.env.SECRET_KEY);
+const signer = Ed25519Keypair.deriveKeypair(process.env.SECRET_KEY);
 
 class EventSigner {
   async sign(event: TokenLockedEvent): Promise<

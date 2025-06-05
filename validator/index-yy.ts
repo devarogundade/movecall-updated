@@ -45,7 +45,7 @@ class EventSigner {
     | null
   > {
     try {
-      const signer = Ed25519Keypair.fromSecretKey(key);
+      const signer = Ed25519Keypair.deriveKeypair(key);
       const signature = await signer.sign(new TextEncoder().encode(event.uid));
 
       return {
