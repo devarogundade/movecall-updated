@@ -1,12 +1,10 @@
 {
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "start2": "node dist/index-yy.js"
+    "start": "node dist/index.js"
   },
   "dependencies": {
-    "@iota/iota-sdk": "^1.1.0",
-    "@iota/iota-sdk": "^1.29.1",
+    "@iota/iota-sdk": "^1.2.0",
     "axios": "^1.9.0",
     "dotenv": "^16.5.0",
     "viem": "^2.29.2"

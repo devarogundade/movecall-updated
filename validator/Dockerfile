@@ -10,4 +10,4 @@ COPY . .
 RUN npm run build
 
 # Start the app
-CMD ["npm", "run", "start2"]
+CMD ["npm", "run", "start"]
