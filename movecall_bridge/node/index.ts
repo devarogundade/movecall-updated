@@ -62,6 +62,8 @@ const TokenMemPool: Record<string, TokenLockedEvent[]> = {};
 const MessageMemPool: Record<string, MessageSentEvent[]> = {};
 const ProcessingPool: Record<string, boolean> = {};
 
+const Transactions: Record<string, string> = {};
+
 const MOVECALL: Hex =
   "0x15ebec4c1f58e38024783d351f69ccdcebf02561e5d85aaf9ac40145770a0fc4";
 const MOVECALL_BRIDGE: Hex =
@@ -164,6 +166,8 @@ class Attester {
       delete TokenMemPool[event.uid];
       delete ProcessingPool[event.uid];
 
+      Transactions[event.uid] = digest;
+
       return true;
     } catch (error) {
       console.error("Error attesting event:", error);
@@ -216,6 +220,10 @@ class Server {
           res.writeHead(200);
           res.end(JSON.stringify({ message: "Received", data }));
         });
+      } else if (req.url === "/transactions" && req.method === "GET") {
+        res.setHeader("Content-Type", "application/json");
+        res.writeHead(200);
+        res.end(JSON.stringify({ transactions: Transactions }));
       } else {
         res.setHeader("Content-Type", "application/json");
         res.writeHead(200);
