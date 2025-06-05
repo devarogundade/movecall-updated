@@ -37,7 +37,7 @@ onMounted(() => {
                 <div class="logo">
                     <p>Bridge</p>
                     <p>|</p>
-                    <h3>MoveCall<span>Call.</span></h3>
+                    <h3>Move<span>Call.</span></h3>
                 </div>
 
                 <div class="tabs">
