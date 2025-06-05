@@ -1,3 +1,4 @@
+import { IOTA_TYPE_ARG } from "@iota/iota-sdk/utils";
 import { Transaction } from "@iota/iota-sdk/transactions";
 import { client, Coins, Contract, Eth_Coin, Doge_Coin, signer } from "./shared";
 import { bcs } from "@iota/iota-sdk/bcs";
@@ -101,10 +102,31 @@ async function depositCoins(
   console.log("Transaction digest:", digest);
 }
 
+async function depositCoinsIota() {
+  const transaction = new Transaction();
+  const [coin_deposited] = transaction.splitCoins(transaction.gas, [
+    5_000_000_000,
+  ]);
+  transaction.moveCall({
+    target: `${Contract.MoveCall}::movecall_bridge::deposit`,
+    arguments: [
+      transaction.object(Contract.MoveCallBridge),
+      transaction.object(Contract.MoveCallBridgeCap),
+      transaction.object(coin_deposited),
+    ],
+    typeArguments: [IOTA_TYPE_ARG],
+  });
+  transaction.setGasBudget(5_000_000);
+  const { digest } = await client.signAndExecuteTransaction({
+    transaction,
+    signer,
+  });
+  console.log("Transaction digest:", digest);
+}
+
 async function main() {
   await setQuorum();
   await setMinWeight();
-
   // Deposit ETH
   const eth_amount = 1_000_000 * 10 ** 9;
   await mintCoins(
@@ -117,13 +139,11 @@ async function main() {
     coinType: `${Contract.MoveCall}::${Eth_Coin.module}::${Eth_Coin.coinType}`,
     owner: signer.getPublicKey().toIotaAddress(),
   });
-
   await depositCoins(
     eth_coin_deposited.data[0].coinObjectId,
     Eth_Coin.module,
     Eth_Coin.coinType
   );
-
   // Deposit DOGE
   const doge_amount = 10_000 * 10 ** 9;
   await mintCoins(
@@ -141,6 +161,8 @@ async function main() {
     Doge_Coin.module,
     Doge_Coin.coinType
   );
+
+  await depositCoinsIota();
 }
 
 main();

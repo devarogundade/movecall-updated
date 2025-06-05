@@ -201,4 +201,4 @@ class Registrar {
 }
 
 new EventListener().startListening(callback);
-new Registrar().registerToService();
+// new Registrar().registerToService();

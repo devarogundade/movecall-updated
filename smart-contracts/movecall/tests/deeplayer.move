@@ -75,7 +75,7 @@ module movecall::deeplayer_tests {
         let mut service_directory = ts::take_shared<ServiceDirectory>(&scenario);
         let mut service_manager = ts::take_shared<ServiceManager>(&scenario);
         let mut movecall_bridge = ts::take_shared<MoveCallBridge>(&scenario);   
-        let mut nebula_cap = ts::take_from_sender<MoveCallBridgeCap>(&scenario);
+        let mut movecall_bridge_cap = ts::take_from_sender<MoveCallBridgeCap>(&scenario);
 
 
         // ========== CREATE COIN ========== //
@@ -180,28 +180,28 @@ module movecall::deeplayer_tests {
         ts::next_tx(&mut scenario, admin);
 
         // Mint coins to deposit into movecall_bridge
-        let nebula_amount = 100_000;
-        lbtc::mint(&mut faucet, nebula_amount, admin, ts::ctx(&mut scenario));
+        let movecall_bridge_amount = 100_000;
+        lbtc::mint(&mut faucet, movecall_bridge_amount, admin, ts::ctx(&mut scenario));
         
         ts::next_tx(&mut scenario, admin);
-        let nebula_coin_deposited = ts::take_from_address<Coin<LBTC>>(&scenario, admin);
+        let movecall_bridge_coin_deposited = ts::take_from_address<Coin<LBTC>>(&scenario, admin);
 
         movecall_bridge::deposit<LBTC>(
             &mut movecall_bridge,
-            &nebula_cap,
-            nebula_coin_deposited,
+            &movecall_bridge_cap,
+            movecall_bridge_coin_deposited,
             ts::ctx(&mut scenario)
         );
 
         movecall_bridge::set_required_operator_weight(
             &mut service_manager,
-            &nebula_cap,
+            &movecall_bridge_cap,
             0, // min_weight
         );
 
         movecall_bridge::set_quorum(
             &mut service_manager,
-            &nebula_cap,
+            &movecall_bridge_cap,
             vector[utils_module::get_strategy_id<LBTC>()], // strategy_ids
             vector[10_000] // multipliers
         );
@@ -302,7 +302,7 @@ module movecall::deeplayer_tests {
         ts::return_shared(service_directory);
         ts::return_to_sender(&scenario, treasury_cap);
         ts::return_shared(movecall_bridge);
-        ts::return_to_sender(&scenario, nebula_cap);
+        ts::return_to_sender(&scenario, movecall_bridge_cap);
         ts::end(scenario);
     }
 
