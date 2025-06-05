@@ -200,25 +200,27 @@ const callback: SubmitCallback = {
 class Server {
   start() {
     const server = http.createServer((req, res) => {
-      let body = "";
+      if (req.url === "/token-locked-event" && req.method === "POST") {
+        let body = "";
 
-      req.on("data", (chunk) => {
-        body += chunk.toString(); // Convert Buffer to string
-      });
+        req.on("data", (chunk) => {
+          body += chunk.toString(); // Convert Buffer to string
+        });
 
-      req.on("end", () => {
-        const data = JSON.parse(body); // assuming it's JSON
+        req.on("end", () => {
+          const data = JSON.parse(body); // assuming it's JSON
 
-        if (req.url === "/token-locked-event" && req.method === "POST") {
           callback.onSubmitForToken(data);
-        } else if (req.url === "/message-sent-event" && req.method === "POST") {
-          callback.onSubmitForMessage(data);
-        }
 
+          res.setHeader("Content-Type", "application/json");
+          res.writeHead(200);
+          res.end(JSON.stringify({ message: "Received", data }));
+        });
+      } else {
         res.setHeader("Content-Type", "application/json");
         res.writeHead(200);
-        res.end(JSON.stringify({ message: "Received", data }));
-      });
+        res.end(JSON.stringify({ message: "No data" }));
+      }
     });
 
     server.listen(process.env.PORT);
