@@ -206,10 +206,9 @@ class Server {
         body += chunk.toString(); // Convert Buffer to string
       });
 
-      const data = JSON.parse(body); // assuming it's JSON
-      console.log("Received POST data:", data);
-
       req.on("end", () => {
+        const data = JSON.parse(body); // assuming it's JSON
+
         if (req.url === "/token-locked-event" && req.method === "POST") {
           callback.onSubmitForToken(data);
         } else if (req.url === "/message-sent-event" && req.method === "POST") {
