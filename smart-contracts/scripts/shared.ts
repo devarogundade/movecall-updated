@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { getFullnodeUrl, IotaClient } from "@iota/iota-sdk/client";
-import { Ed25519Keypair } from "@iota/iota-sdk/k";
+import { Ed25519Keypair } from "@iota/iota-sdk/keypairs/ed25519";
 
 dotenv.config();
 

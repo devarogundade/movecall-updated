@@ -1,5 +1,5 @@
 import { Transaction } from "@iota/iota-sdk/transactions";
-import { Contract, client, Coins, signer, Eth_Coin } from "./shared";
+import { Contract, client, Coins, signer, Eth_Coin, Doge_Coin } from "./shared";
 
 async function initSupply(
   module: string,
@@ -30,6 +30,12 @@ async function main() {
     Eth_Coin.coinType,
     Eth_Coin.treasuryCap,
     Eth_Coin.faucet
+  );
+  await initSupply(
+    Doge_Coin.module,
+    Doge_Coin.coinType,
+    Doge_Coin.treasuryCap,
+    Doge_Coin.faucet
   );
 }
 
