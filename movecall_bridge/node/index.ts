@@ -215,11 +215,11 @@ class Server {
         } else if (req.url === "/message-sent-event" && req.method === "POST") {
           callback.onSubmitForMessage(data);
         }
-      });
 
-      res.setHeader("Content-Type", "application/json");
-      res.writeHead(200);
-      res.end(JSON.stringify({ message: "Received", data }));
+        res.setHeader("Content-Type", "application/json");
+        res.writeHead(200);
+        res.end(JSON.stringify({ message: "Received", data }));
+      });
     });
 
     server.listen(process.env.PORT);
