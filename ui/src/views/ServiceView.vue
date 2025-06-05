@@ -42,7 +42,7 @@ import { useBalanceStore } from '@/stores/balance';
                                     <p>IOTA Restaked</p>
                                     <div class="value">
                                         <p>
-                                            {{ Converter.toMoney(20483) }}
+                                            {{ Converter.toMoney(2083) }}
                                         </p>
                                         <span>IOTA</span>
                                     </div>

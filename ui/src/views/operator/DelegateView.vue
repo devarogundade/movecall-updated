@@ -45,6 +45,10 @@ const delegate = async () => {
             description: "You have successfully delegated your shares.",
             category: "success"
         });
+
+        getIsDelegated();
+        getIsDelegatedTo();
+        balanceStore.getOperatorBalances();
     } else {
         notify.push({
             title: "Delegation failed!",
@@ -71,6 +75,7 @@ const redelegate = async () => {
 
     if (digest) {
         balanceStore.getBalances(walletStore.address);
+        balanceStore.getOperatorBalances();
 
         notify.push({
             title: "Redelegation successful!",
@@ -80,6 +85,7 @@ const redelegate = async () => {
 
         getIsDelegated();
         getIsDelegatedTo();
+        balanceStore.getOperatorBalances();
     }
 
     else {
@@ -112,6 +118,10 @@ const undelegate = async () => {
             description: "You have successfully undelegated your shares.",
             category: "success"
         });
+
+        getIsDelegated();
+        getIsDelegatedTo();
+        balanceStore.getOperatorBalances();
     } else {
         notify.push({
             title: "Undelegation failed!",
@@ -316,7 +326,7 @@ onMounted(() => {
                                     </div>
                                 </td>
                                 <td>
-                                    {{ Converter.toMoney(20483) }}
+                                    {{ Converter.toMoney(2083) }}
                                 </td>
                                 <td>3</td>
                                 <td>20</td>
