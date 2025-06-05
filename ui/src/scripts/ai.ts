@@ -39,7 +39,7 @@ const CHAT_COLLECTION: string = "chats";
 
 const AI = {
   id: "movecall_ai",
-  knowledge: ``,
+  knowledge: `MoveCall is a decentralized security agent for the IOTA ecosystem, designed to extend base-layer security to critical services like oracles, bridges, and real-world asset protocols. By enabling IOTA holders to restake their tokens, MoveCall transforms idle assets into active security layers, rewarding users while securing essential infrastructure. Developers can easily integrate MoveCall without building their own validator sets, while node operators perform verification tasks and earn rewards. MoveCall acts as a trust layer that scales the IOTA ecosystem safely, efficiently, and with minimal overhead.`,
 
   getChats(from: string, callback: (chats: Chat[]) => void) {
     try {

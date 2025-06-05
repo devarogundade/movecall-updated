@@ -11,9 +11,9 @@ import { onMounted, ref, watch } from 'vue';
 
 const Faqs = [
     "What is Restaking?",
-    "Can BTC LSTs be restaked?",
+    "Can IOTA LSTs be restaked?",
     "Risks of Restaking?",
-    "What is BTC LST?",
+    "What is IOTA LST?",
 ];
 
 const text = ref<string>('');
@@ -62,6 +62,15 @@ const sendText = async () => {
     AI.chat(walletStore.address, text.value);
 
     text.value = '';
+
+    setTimeout(() => {
+        chats.value.push({
+            from: 'movecall_ai',
+            text: 'Thinking...',
+            to: walletStore.address || 'user',
+            timestampMs: Date.now()
+        });
+    }, 500);
 };
 
 onMounted(() => {
