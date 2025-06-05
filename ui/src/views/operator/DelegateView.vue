@@ -191,9 +191,7 @@ onMounted(() => {
                                 <div class="value">
                                     <p>
                                         {{
-                                            Converter.toMoney((Converter.fromIOTA(balanceStore.total_shares[operator.address])
-                                        ||
-                                        0) * 2654.43)
+                                            Converter.toMoney((Converter.fromIOTA(balanceStore.total_shares[operator.address])))
                                         }}
                                     </p>
                                     <span>IOTA</span>

@@ -88,7 +88,7 @@ const services: Service[] = [
       about: "IOTA Coin.",
       link: "https://iota.org",
     },
-    weekly_rewards: 16402000,
+    weekly_rewards: 18500,
   },
 ];
 

@@ -259,6 +259,10 @@ onMounted(() => {
     color: var(--tx-semi);
 }
 
+.service {
+    margin-top: 20px;
+}
+
 .service .description {
     margin: 10px 0;
     font-size: 14px;
