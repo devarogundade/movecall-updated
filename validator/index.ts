@@ -37,6 +37,11 @@ type TokenLockedEvent = {
 
 type MessageSentEvent = {
   uid: Hex;
+  from: Hex;
+  to: Hex;
+  payload: Hex;
+  block_number: string;
+  chain_id: number;
 };
 
 interface EventListenerCallback {
@@ -49,8 +54,29 @@ if (!process.env.SECRET_KEY) throw new Error("Invalid secret key!");
 const signer = Ed25519Keypair.deriveKeypair(process.env.SECRET_KEY);
 
 class EventSigner {
-  async sign(event: TokenLockedEvent): Promise<
+  async signForToken(event: TokenLockedEvent): Promise<
     | (TokenLockedEvent & {
+        signature: number[];
+        signer: string;
+      })
+    | null
+  > {
+    try {
+      const signature = await signer.sign(new TextEncoder().encode(event.uid));
+
+      return {
+        ...event,
+        signature: Array.from(signature),
+        signer: signer.getPublicKey().toIotaAddress(),
+      };
+    } catch (error) {
+      console.error("Error attesting event:", error);
+      return null;
+    }
+  }
+
+  async signForMessage(event: MessageSentEvent): Promise<
+    | (MessageSentEvent & {
         signature: number[];
         signer: string;
       })
@@ -76,7 +102,7 @@ const eventSigner = new EventSigner();
 const callback: EventListenerCallback = {
   onTokenLockedEvent(events: TokenLockedEvent[]) {
     events.forEach(async (event) => {
-      const data = await eventSigner.sign(event);
+      const data = await eventSigner.signForToken(event);
       if (data) {
         API.post("/token-locked-event", JSON.stringify(data));
       }
@@ -85,7 +111,7 @@ const callback: EventListenerCallback = {
 
   onMessageSentEvent(events: MessageSentEvent[]) {
     events.forEach(async (event) => {
-      const data = await eventSigner.sign(event);
+      const data = await eventSigner.signForMessage(event);
       if (data) {
         API.post("/message-sent-event", JSON.stringify(data));
       }

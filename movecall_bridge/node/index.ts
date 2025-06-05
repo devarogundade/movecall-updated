@@ -21,6 +21,17 @@ type TokenLockedEvent = {
   signer: string;
 };
 
+type MessageSentEvent = {
+  uid: Hex;
+  from: Hex;
+  to: Hex;
+  payload: Hex;
+  block_number: string;
+  chain_id: number;
+  signature: number[];
+  signer: string;
+};
+
 type SignedTokenLockedEvent = {
   uid: Hex;
   coinType: string;
@@ -33,10 +44,22 @@ type SignedTokenLockedEvent = {
   signers: string[];
 };
 
+type SignedMessageSentEvent = {
+  uid: Hex;
+  from: Hex;
+  to: Hex;
+  payload: Hex;
+  block_number: string;
+  chain_id: number;
+  signatures: number[][];
+  signers: string[];
+};
+
 dotenv.config();
 
 const MinAttestation = 2;
-const MemPool: Record<string, TokenLockedEvent[]> = {};
+const TokenMemPool: Record<string, TokenLockedEvent[]> = {};
+const MessageMemPool: Record<string, MessageSentEvent[]> = {};
 const ProcessingPool: Record<string, boolean> = {};
 
 const MOVECALL: Hex =
@@ -65,7 +88,8 @@ COIN_METADATA[DOGE_TYPE_ARG] =
 const client = new IotaClient({ url: getFullnodeUrl("testnet") });
 
 interface SubmitCallback {
-  onSubmit: (event: TokenLockedEvent) => void;
+  onSubmitForToken: (event: TokenLockedEvent) => void;
+  onSubmitForMessage: (event: MessageSentEvent) => void;
 }
 
 class Attester {
@@ -137,7 +161,7 @@ class Attester {
 
       console.log("Transaction Digest:", digest);
 
-      delete MemPool[event.uid];
+      delete TokenMemPool[event.uid];
       delete ProcessingPool[event.uid];
 
       return true;
@@ -152,13 +176,23 @@ class Attester {
 const attester = new Attester();
 
 const callback: SubmitCallback = {
-  onSubmit(event: TokenLockedEvent) {
-    if (!MemPool[event.uid]) MemPool[event.uid] = [];
+  onSubmitForToken(event: TokenLockedEvent) {
+    if (!TokenMemPool[event.uid]) TokenMemPool[event.uid] = [];
 
-    MemPool[event.uid].push(event);
+    TokenMemPool[event.uid].push(event);
 
-    if (MemPool[event.uid].length >= MinAttestation) {
-      attester.attest(MemPool[event.uid]);
+    if (TokenMemPool[event.uid].length >= MinAttestation) {
+      attester.attest(TokenMemPool[event.uid]);
+    }
+  },
+
+  onSubmitForMessage(event: MessageSentEvent) {
+    if (!MessageMemPool[event.uid]) MessageMemPool[event.uid] = [];
+
+    MessageMemPool[event.uid].push(event);
+
+    if (MessageMemPool[event.uid].length >= MinAttestation) {
+      // attester.writeMessage(MessageMemPool[event.uid]);
     }
   },
 };
@@ -166,34 +200,26 @@ const callback: SubmitCallback = {
 class Server {
   start() {
     const server = http.createServer((req, res) => {
-      if (req.url === "/submit" && req.method === "POST") {
-        let body = "";
+      let body = "";
 
-        req.on("data", (chunk) => {
-          body += chunk.toString(); // Convert Buffer to string
-        });
+      req.on("data", (chunk) => {
+        body += chunk.toString(); // Convert Buffer to string
+      });
 
-        req.on("end", () => {
-          try {
-            const data = JSON.parse(body); // assuming it's JSON
-            console.log("Received POST data:", data);
+      const data = JSON.parse(body); // assuming it's JSON
+      console.log("Received POST data:", data);
 
-            // You can call your callback with the parsed data
-            callback.onSubmit(data);
+      req.on("end", () => {
+        if (req.url === "/token-locked-event" && req.method === "POST") {
+          callback.onSubmitForToken(data);
+        } else if (req.url === "/message-sent-event" && req.method === "POST") {
+          callback.onSubmitForMessage(data);
+        }
+      });
 
-            res.setHeader("Content-Type", "application/json");
-            res.writeHead(200);
-            res.end(JSON.stringify({ message: "Received", data }));
-          } catch (err: any) {
-            res.writeHead(400);
-            res.end(JSON.stringify({ error: err.message }));
-          }
-        });
-      } else {
-        res.setHeader("Content-Type", "application/json");
-        res.writeHead(200);
-        res.end(JSON.stringify({ message: "OK" }));
-      }
+      res.setHeader("Content-Type", "application/json");
+      res.writeHead(200);
+      res.end(JSON.stringify({ message: "Received", data }));
     });
 
     server.listen(process.env.PORT);
