@@ -63,7 +63,7 @@ const mint = async () => {
             description: `You have minted ${strategy.value.faucet.amount} ${strategy.value.symbol}`,
             category: "success",
             linkTitle: "View on Iota Explorer",
-            linkUrl: `https://iotascan.xyz/testnet/tx/${digest}?network=testnet`,
+            linkUrl: `https://iotascan.com/testnet/tx/${digest}?network=testnet`,
         });
     } else {
         notify.push({
@@ -111,7 +111,7 @@ const restake = async () => {
             description: `You have restaked ${Converter.toMoney(amount.value)} ${strategy.value.symbol}`,
             category: "success",
             linkTitle: "View on Iota Explorer",
-            linkUrl: `https://iotascan.xyz/testnet/tx/${digest}?network=testnet`,
+            linkUrl: `https://iotascan.com/testnet/tx/${digest}?network=testnet`,
         });
 
         amount.value = undefined;
