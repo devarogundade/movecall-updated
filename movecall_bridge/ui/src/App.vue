@@ -123,12 +123,12 @@ const bridge = async () => {
   let tx: Hex | null = null;
 
   if (form.value.token.address == zeroAddress) {
-    tx = await Contract.lockETH(
+    tx = await Contract.lockAndMintETH(
       parseUnits(form.value.amount.toString(), form.value.token.decimals),
       form.value.receiver,
     );
   } else {
-    tx = await Contract.lock(
+    tx = await Contract.lockAndMint(
       form.value.token.address,
       parseUnits(form.value.amount.toString(), form.value.token.decimals),
       form.value.receiver,

@@ -13,7 +13,7 @@
                         <button class="tab">GitHub</button>
                     </a>
 
-                    <a href="https://x.com/deep_layr" target="_blank" rel="noopener noreferrer">
+                    <a href="https://x.com/devarogundade" target="_blank" rel="noopener noreferrer">
                         <button class="tab">
                             <img src="/images/x.png" alt="X">
                         </button>

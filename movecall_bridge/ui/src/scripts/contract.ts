@@ -1,17 +1,21 @@
 import { config } from "./config";
 import { waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import type { Hex } from "viem";
-import { nebulaAbi } from "../abis/movecall_bridge";
+import { movecallBridgeAbi } from "../abis/movecall_bridge";
 
 const Contract = {
-  address: "0x5629A11542f5582A466d281f3Ce8Aa5309f42837" as Hex,
+  address: "0xB4a0d0cf821F3EC41d8dd1d362eba14606ea4E0b" as Hex,
 
-  async lock(token: Hex, amount: bigint, receiver: Hex): Promise<Hex | null> {
+  async lockAndMint(
+    token: Hex,
+    amount: bigint,
+    receiver: Hex
+  ): Promise<Hex | null> {
     try {
       const result = await writeContract(config, {
-        abi: nebulaAbi,
+        abi: movecallBridgeAbi,
         address: this.address,
-        functionName: "lock",
+        functionName: "lockAndMint",
         args: [token, amount, receiver],
       });
 
@@ -25,12 +29,12 @@ const Contract = {
     }
   },
 
-  async lockETH(amount: bigint, receiver: Hex): Promise<Hex | null> {
+  async lockAndMintETH(amount: bigint, receiver: Hex): Promise<Hex | null> {
     try {
       const result = await writeContract(config, {
-        abi: nebulaAbi,
+        abi: movecallBridgeAbi,
         address: this.address,
-        functionName: "lockETH",
+        functionName: "lockAndMintETH",
         args: [receiver],
         value: amount,
       });

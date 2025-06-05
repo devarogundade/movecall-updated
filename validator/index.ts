@@ -21,7 +21,7 @@ const DELEGATION_MANAGER: Hex =
   "0x58db2a42669b7bb98231ddf63fa8f23160d706ccd656a8f741f64fc3f662e222";
 
 const HOLESKY_MOVECALL_BRIDGE: Hex =
-  "0x5629A11542f5582A466d281f3Ce8Aa5309f42837";
+  "0xB4a0d0cf821F3EC41d8dd1d362eba14606ea4E0b";
 
 const API = axios.create({ baseURL: process.env.MAIN_URL });
 
@@ -141,13 +141,27 @@ class EventListener {
 
     console.log("Started listening from block: ", fromBlock);
 
-    this.unwatch = publicClient.watchContractEvent({
+    this.unwatch = publicClient.watchEvent({
       address: HOLESKY_MOVECALL_BRIDGE,
       fromBlock,
-      abi: "" as any,
+      event: parseAbiItem(
+        "event TokenLocked(bytes32 indexed uid, string coinType, uint256 decimals, uint256 amount, bytes32 receiver)"
+      ),
       pollingInterval: 15_000, // 15 Secs
       onLogs: (events) => {
-        console.log(events);
+        callback.onTokenLockedEvent(
+          events.map((event) => {
+            return {
+              uid: event.args.uid!,
+              coinType: event.args.coinType!,
+              decimals: Number(event.args.decimals!),
+              amount: String(event.args.amount!),
+              receiver: event.args.receiver!,
+              block_number: String(event.blockNumber),
+              chain_id: 17_000,
+            } as TokenLockedEvent;
+          })
+        );
       },
       onError: (error) => {
         console.log(error);

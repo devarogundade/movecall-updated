@@ -6,14 +6,14 @@ import { parseUnits } from "viem";
 
 const TokenModule = buildModule("TokenModule", (m) => {
   const iota = m.contract("Token", ["IOTA", "IOTA", 9], { id: "Token_IOTA" });
-  const lbtc = m.contract("Token", ["Liquid Bitcoin", "LBTC", 8], {
-    id: "Token_LBTC",
+  const doge = m.contract("Token", ["DogeCoin", "DOGE", 18], {
+    id: "Token_DOGE",
   });
 
   m.call(iota, "mint", [parseUnits("1", 9)], { id: "IOTA" });
-  m.call(lbtc, "mint", [parseUnits("0.5", 8)], { id: "LBTC" });
+  m.call(doge, "mint", [parseUnits("150000", 18)], { id: "DOGE" });
 
-  return { iota, lbtc };
+  return { iota, doge };
 });
 
 export default TokenModule;
