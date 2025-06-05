@@ -12,15 +12,16 @@ import type { Hex, WatchEventReturnType } from "viem";
 dotenv.config();
 
 const MoveCall: Hex =
-  "0x8c4bcfe5cac89ea732d9f507f46d56a7e37e3d161007060a5686b9399a9ea03c";
+  "0x15ebec4c1f58e38024783d351f69ccdcebf02561e5d85aaf9ac40145770a0fc4";
 const Service_DIRECTORY: Hex =
-  "0x972411f5178b5de7b7616f1a65bdf5ada2c89f62693cbc6b7d2df165669aec37";
+  "0x153f162474f7b5c13fbb8f2b356de6122b33ba4d061301d451aa02c32e704029";
 const Service_MANAGER: Hex =
-  "0xafcde1ad80463f96bb2163935b1669e6d68479b12973ea4286f56295c58a9233";
+  "0xbb3d1da683ec7bdd40b8e30fdadbca7e8a6d70295fb74d1419af13799bf90c20";
 const DELEGATION_MANAGER: Hex =
-  "0x5ce45c986b9b830939998114531c30a84a9da636912e5d9af596614d41364316";
+  "0x58db2a42669b7bb98231ddf63fa8f23160d706ccd656a8f741f64fc3f662e222";
 
-const HOLESKY_NEBULA: Hex = "0x5629A11542f5582A466d281f3Ce8Aa5309f42837";
+const HOLESKY_MOVECALL_BRIDGE: Hex =
+  "0x5629A11542f5582A466d281f3Ce8Aa5309f42837";
 
 const API = axios.create({ baseURL: process.env.MAIN_URL });
 
@@ -115,7 +116,7 @@ class EventListener {
     console.log("Started listening from block: ", fromBlock);
 
     this.unwatch = publicClient.watchContractEvent({
-      address: HOLESKY_NEBULA,
+      address: HOLESKY_MOVECALL_BRIDGE,
       fromBlock,
       abi: "" as any,
       pollingInterval: 15_000, // 15 Secs

@@ -6,7 +6,7 @@ import { zeroAddress } from "viem";
 import TokenModule from "./Token";
 
 const MoveCall =
-  "0x8c4bcfe5cac89ea732d9f507f46d56a7e37e3d161007060a5686b9399a9ea03c";
+  "0x15ebec4c1f58e38024783d351f69ccdcebf02561e5d85aaf9ac40145770a0fc4";
 
 const NebulaModule = buildModule("NebulaModule", (m) => {
   const movecall_bridge = m.contract("MoveCallBridge");

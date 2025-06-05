@@ -39,28 +39,28 @@ const MinAttestation = 2;
 const MemPool: Record<string, TokenLockedEvent[]> = {};
 const ProcessingPool: Record<string, boolean> = {};
 
-const MoveCall: Hex =
-  "0x8c4bcfe5cac89ea732d9f507f46d56a7e37e3d161007060a5686b9399a9ea03c";
-const NEBULA: Hex =
-  "0x81ef5c1b3b5230372797d09b66ec3c03a90c5058be5d98ee6808fa30a2ad4477";
-const Service_DIRECTORY: Hex =
-  "0x972411f5178b5de7b7616f1a65bdf5ada2c89f62693cbc6b7d2df165669aec37";
-const Service_MANAGER: Hex =
-  "0xafcde1ad80463f96bb2163935b1669e6d68479b12973ea4286f56295c58a9233";
+const MOVECALL: Hex =
+  "0x15ebec4c1f58e38024783d351f69ccdcebf02561e5d85aaf9ac40145770a0fc4";
+const MOVECALL_BRIDGE: Hex =
+  "0x157dbc3e87ad585e82d189d203d7d44c86cbf55c914a8144d637af8cac2f9d79";
+const SERVICE_DIRECTORY: Hex =
+  "0x153f162474f7b5c13fbb8f2b356de6122b33ba4d061301d451aa02c32e704029";
+const SERVICE_MANAGER: Hex =
+  "0xbb3d1da683ec7bdd40b8e30fdadbca7e8a6d70295fb74d1419af13799bf90c20";
 const DELEGATION_MANAGER: Hex =
-  "0x5ce45c986b9b830939998114531c30a84a9da636912e5d9af596614d41364316";
+  "0x58db2a42669b7bb98231ddf63fa8f23160d706ccd656a8f741f64fc3f662e222";
 
 const COIN_METADATA: Record<string, Hex> = {};
 
-const LBTC_TYPE_ARG = `${MoveCall}::lbtc::LBTC`;
-const ETH_TYPE_ARG = `${MoveCall}::eth::ETH`;
+const ETH_TYPE_ARG = `${MOVECALL}::eth::ETH`;
+const DOGE_TYPE_ARG = `${MOVECALL}::doge::DOGE`;
 
 COIN_METADATA[IOTA_TYPE_ARG] =
   "0x587c29de216efd4219573e08a1f6964d4fa7cb714518c2c8a0f29abfa264327d";
-COIN_METADATA[LBTC_TYPE_ARG] =
-  "0xfd5abf4eb708d12527e4a5589664530f976551e1950c67f9437fc56128dfab06";
 COIN_METADATA[ETH_TYPE_ARG] =
-  "0xe230c97bba70c074518315f1fb3f9047f0fb4927b20c5e110a30d4eeb22b494b";
+  "0x889649cd0417e8e321c9cbfa87b3fb0bacbbaa6ff8974791dfca663facdbf5e6";
+COIN_METADATA[DOGE_TYPE_ARG] =
+  "0x2dfbea97cd9f9ae769b95abc1d07a94d690350d158706b3c320935fb63d25dc3";
 
 const client = new IotaClient({ url: getFullnodeUrl("testnet") });
 
@@ -106,12 +106,12 @@ class Attester {
       const tx = new Transaction();
 
       tx.moveCall({
-        target: `${MoveCall}::movecall_bridge::attest`,
+        target: `${MOVECALL}::movecall_bridge::attest`,
         arguments: [
-          tx.object(NEBULA),
+          tx.object(MOVECALL_BRIDGE),
           tx.object(COIN_METADATA[event.coinType]),
-          tx.object(Service_MANAGER),
-          tx.object(Service_DIRECTORY),
+          tx.object(SERVICE_MANAGER),
+          tx.object(SERVICE_DIRECTORY),
           tx.object(DELEGATION_MANAGER),
           bcs
             .vector(bcs.vector(bcs.U8))

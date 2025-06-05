@@ -14,7 +14,8 @@ import type { Hex, WatchEventReturnType } from "viem";
 
 dotenv.config();
 
-const HOLESKY_NEBULA: Hex = "0x5629A11542f5582A466d281f3Ce8Aa5309f42837";
+const HOLESKY_MOVECALL_BRIDGE: Hex =
+  "0x5629A11542f5582A466d281f3Ce8Aa5309f42837";
 
 const API = axios.create({ baseURL: process.env.MAIN_URL });
 
@@ -112,7 +113,7 @@ class EventListener {
     console.log("Started listening from block: ", fromBlock);
 
     this.unwatch = publicClient.watchEvent({
-      address: HOLESKY_NEBULA,
+      address: HOLESKY_MOVECALL_BRIDGE,
       fromBlock,
       event: parseAbiItem(
         "event TokenLocked(bytes32 indexed uid, string coinType, uint256 decimals, uint256 amount, bytes32 receiver)"

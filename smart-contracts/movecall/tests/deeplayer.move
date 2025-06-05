@@ -176,7 +176,7 @@ module movecall::deeplayer_tests {
             ts::ctx(&mut scenario)
         );
 
-        // =========== DEPOSIT INTO NEBULA ========== //
+        // =========== DEPOSIT INTO MOVECALL_BRIDGE ========== //
         ts::next_tx(&mut scenario, admin);
 
         // Mint coins to deposit into movecall_bridge
@@ -212,7 +212,7 @@ module movecall::deeplayer_tests {
         ts::next_tx(&mut scenario, admin);
         let coin_metadata = ts::take_immutable<CoinMetadata<LBTC>>(&scenario);
 
-        // // =========== ATTEST TO NEBULA EVENT ========== //
+        // // =========== ATTEST TO MOVECALL_BRIDGE EVENT ========== //
         // ts::next_tx(&mut scenario, operator);
 
         // movecall_bridge::attest<LBTC>(
@@ -231,7 +231,7 @@ module movecall::deeplayer_tests {
         //     ts::ctx(&mut scenario)
         // );
 
-        // // =========== ATTEST2 TO NEBULA EVENT ========== //
+        // // =========== ATTEST2 TO MOVECALL_BRIDGE EVENT ========== //
         // ts::next_tx(&mut scenario, operator2);
 
         // movecall_bridge::attest<LBTC>(

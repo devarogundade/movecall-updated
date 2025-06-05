@@ -1,5 +1,5 @@
 import { Transaction } from "@iota/iota-sdk/transactions";
-import { client, Coins, Contract, Eth_Coin, signer } from "./shared";
+import { client, Coins, Contract, Eth_Coin, Doge_Coin, signer } from "./shared";
 import { bcs } from "@iota/iota-sdk/bcs";
 
 async function setMinWeight() {
@@ -40,11 +40,7 @@ async function setQuorum() {
             ),
           ])
       ),
-      transaction.pure(
-        bcs
-          .vector(bcs.U64)
-          .serialize([1_500, 1_500, 1_500, 1_500, 1_500, 1_500, 1_000])
-      ),
+      transaction.pure(bcs.vector(bcs.U64).serialize([6_000, 4_000])),
     ],
   });
 
@@ -128,22 +124,22 @@ async function main() {
     Eth_Coin.coinType
   );
 
-  // Deposit LBTC
-  const lbtc_amount = 10_000 * 10 ** 9;
+  // Deposit DOGE
+  const doge_amount = 10_000 * 10 ** 9;
   await mintCoins(
-    lbtc_amount,
-    Coins[5].faucet,
-    Coins[5].module,
-    Coins[5].coinType
+    doge_amount,
+    Doge_Coin.faucet,
+    Doge_Coin.module,
+    Doge_Coin.coinType
   );
-  const lbtc_coin_deposited = await client.getCoins({
-    coinType: `${Contract.MoveCall}::${Coins[5].module}::${Coins[5].coinType}`,
+  const doge_coin_deposited = await client.getCoins({
+    coinType: `${Contract.MoveCall}::${Doge_Coin.module}::${Doge_Coin.coinType}`,
     owner: signer.getPublicKey().toIotaAddress(),
   });
   await depositCoins(
-    lbtc_coin_deposited.data[0].coinObjectId,
-    Coins[5].module,
-    Coins[5].coinType
+    doge_coin_deposited.data[0].coinObjectId,
+    Doge_Coin.module,
+    Doge_Coin.coinType
   );
 }
 

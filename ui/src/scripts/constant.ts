@@ -33,7 +33,7 @@ const strategies: Coin[] = [
       amount: 5,
       module: "ankriota",
       object:
-        "0xbbcdc923ff540b739d0e976f54c37403e36e90d8bffe28abcb25d882ae2a467c",
+        "0x92fb2c5f96742e08341310e945e1255eada96401cb6bebade89699a66d5025e1",
     },
   },
 ];
@@ -74,7 +74,7 @@ const services: Service[] = [
   {
     name: "MoveCallBridge",
     address:
-      "0x8c4bcfe5cac89ea732d9f507f46d56a7e37e3d161007060a5686b9399a9ea03c",
+      "0x15ebec4c1f58e38024783d351f69ccdcebf02561e5d85aaf9ac40145770a0fc4",
     description:
       "MoveCallBridge is a decentralized bridge that allows users to transfer assets and messages between different blockchains using zero-knowledge proofs.",
     link: "https://movecall-bridge.netlify.app",

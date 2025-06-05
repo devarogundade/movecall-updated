@@ -23,6 +23,8 @@ const CoinAPI = {
         const filteredCoins = coins.data.filter(
           (coin) => coin.coinType == coinType
         );
+        console.log(filteredCoins);
+
         if (!balances[coinType]) balances[coinType] = BigInt(0);
         balances[coinType] += filteredCoins.reduce(
           (a, b) => a + BigInt(b.balance),

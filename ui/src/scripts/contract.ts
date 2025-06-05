@@ -8,19 +8,19 @@ import { IOTA_COIN } from "./constant";
 
 const Contract = {
   MoveCall:
-    "0x8c4bcfe5cac89ea732d9f507f46d56a7e37e3d161007060a5686b9399a9ea03c",
+    "0x15ebec4c1f58e38024783d351f69ccdcebf02561e5d85aaf9ac40145770a0fc4",
   ServiceDirectory:
-    "0x972411f5178b5de7b7616f1a65bdf5ada2c89f62693cbc6b7d2df165669aec37",
+    "0x153f162474f7b5c13fbb8f2b356de6122b33ba4d061301d451aa02c32e704029",
   StrategyFactory:
-    "0xa5a3627871928f2c0c67195f62a3d04d921eb2e3566d9ce030a5badfd421c255",
+    "0xde6b361ccbf387979426109692f3ccc609ab8a916b7226cf2f4c413be6a470d1",
   StrategyManager:
-    "0xfd75910c3d514f3bee8e4f5935397d084360ee9198a547b39e05871fafeacc3e",
+    "0x683514bc7bd63d4f62c937c45f5b2ee37411a0e0b0d455f9a7ed050cf9ea999e",
   RewardsCoordinator:
-    "0xc58c64144c1aa5f92f795cc204cc0476bc9cb91276c34571a5ba95f7cdae3143",
+    "0xa477cea84b8d50ee6d4bfa74ff75cf57ad33966ec290b199854a71ece8871746",
   AllocationManager:
-    "0x83ef04924a88e1fd1d0ba5faaef4295babc1e0559a19281978fbd9087cfde3ea",
+    "0x04faf8a30fd4ded13bdcc466138055df3acc6c49c8b2252d13ecdf410a3a1ca0",
   DelegationManager:
-    "0x5ce45c986b9b830939998114531c30a84a9da636912e5d9af596614d41364316",
+    "0x58db2a42669b7bb98231ddf63fa8f23160d706ccd656a8f741f64fc3f662e222",
 
   async mintCoin(
     sender: string,
