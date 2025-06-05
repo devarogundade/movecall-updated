@@ -40,10 +40,10 @@ const strategies: Coin[] = [
 
 const operators: Operator[] = [
   {
-    name: "Font Labs",
-    image: "/images/mysten.png",
+    name: "FontLabs",
+    image: "/images/colors.png",
     about:
-      "At Mysten, we are building a company that aims to address these problems (and many others) by laying the foundations for a decentralized web stack iotatable for mass adoption. The drive to unlock everything that web3 enables is our north star.",
+      "FontLabs. The drive to unlock everything that web3 enables is our north star.",
     active: true,
     address:
       "0x9e1b49043efc0bead9d0381713fa0c4348b05f59450cbb90961b6b98a67adb23",
@@ -51,23 +51,22 @@ const operators: Operator[] = [
   },
   {
     name: "ShunLexxi",
-    image: "/images/pyth.png",
+    image: "/images/colors.png",
     about:
-      "Pyth is a protocol that allows market participants to publish pricing information on-chain for others to use.",
+      "Shunlexxi is a protocol that allows market participants to publish pricing information on-chain for others to use.",
     active: true,
     address:
       "0x43988c5c280487483d05c4d5e1aba8d206f82c4c5d8493e85205f9ac393bcc61",
-    link: "https://pyth.network",
+    link: "https://shunlexxi.network",
   },
   {
-    name: "Krypt0ne",
-    image: "/images/google.png",
-    about:
-      "Our Web3 team at Google Cloud is dedicated to empowering the next generation of decentralized applications and services by providing developers and businesses with the essential tools, infrastructure, and knowledge to build and scale in the Web3 space.",
+    name: "ANKR",
+    image: "/images/ankr.png",
+    about: "ANKR.",
     active: true,
     address:
       "0x237fab2f9f5afc3eacec176fe1721534032cf85590f0e5a36dc6d7c668dbf897",
-    link: "https://google.com",
+    link: "https://ankr.com",
   },
 ];
 
@@ -78,7 +77,7 @@ const services: Service[] = [
       "0x8c4bcfe5cac89ea732d9f507f46d56a7e37e3d161007060a5686b9399a9ea03c",
     description:
       "MoveCallBridge is a decentralized bridge that allows users to transfer assets and messages between different blockchains using zero-knowledge proofs.",
-    link: "https://movecall_bridge.netlify.app",
+    link: "https://movecall-bridge.netlify.app",
     image: "/images/colors.png",
     reward_coin: {
       name: "IOTA",
